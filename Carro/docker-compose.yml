@@ -1,0 +1,12 @@
+version: "2"
+services:
+  server:
+    image: pbl2_carro
+    build:
+      context: .
+      dockerfile: Dockerfile
+    restart: always
+    volumes:
+      - /app
+    ports:
+      - "8000:8000"
