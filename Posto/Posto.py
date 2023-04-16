@@ -51,14 +51,14 @@ class Posto:
         while True:
             sleep(GAS_STATION_TIME_TO_SEND)
             topic = self._topic
-            msg = self._id + ': ' + self._queue.__str__()
+            msg = f'{{"id": "{self._id.__str__()}", "queue": {self._queue}}}'
             result = client.publish(topic, msg)
             status = result[0]
             print('Failed to send message') if status else print('Successful send message')
 
     def start(self) -> None:
-        self._connect_mqtt()
-        thread1 = Thread(target=self._publish)
+        client = self._connect_mqtt()
+        thread1 = Thread(target=self._publish, args=(client,))
         thread2 = Thread(target=self._refresh_queue)
         thread1.start()
         thread2.start()
