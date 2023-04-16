@@ -1,6 +1,7 @@
 import random
 import threading
 import time
+import json
 
 from paho.mqtt import client as mqtt_client
 
@@ -8,7 +9,7 @@ BROKER = 'localhost'
 
 broker = BROKER
 port = 1883
-topic = "posto/id/#"
+topic = "python/mqtt"
 # generate client ID with pub prefix randomly
 client_id = f'python-mqtt-{random.randint(0, 100)}'
 BATTERY_TOTAL_CHARGE = 10
@@ -36,6 +37,7 @@ def connect_mqtt() -> mqtt_client:
 def subscribe(client: mqtt_client):
     def on_message(client, userdata, msg):
         print(f"Received `{msg.payload.decode()}` from `{msg.topic}` topic")
+        print(json.loads(msg.payload.decode().replace("'", '"')))
 
     client.subscribe(topic)
     client.on_message = on_message

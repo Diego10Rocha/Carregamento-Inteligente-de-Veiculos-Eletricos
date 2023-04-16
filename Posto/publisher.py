@@ -33,8 +33,11 @@ def publish(client):
     msg_count = 0
     while True:
         time.sleep(7)
-        msg = f"messages: {msg_count}"
-        result = client.publish(topic, msg)
+        msg = {}
+        msg['queue'] = msg_count
+        msg['id'] = '1bagsb-sbahsja2uu272-nsu2hs2nin'
+        msg['region'] = 2
+        result = client.publish(topic, str(msg))
         # result: [0, 1]
         status = result[0]
         if status == 0:
