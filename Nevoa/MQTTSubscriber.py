@@ -18,7 +18,7 @@ class MQTTSubscriber(ABC):
     def __int__(self, region: int) -> None:
         self._id = uuid4().__str__()
         self._region_id: int = region
-        self._topic: str = f'gas_station/region/{self._region_id}/id/{self._id}'
+        self._topic: str = f'gas_station/region/{self._region_id}/id/+'
         self._broker_addr: str = eval(f'BROKER_REGION_{self._region_id}_ADDR')
         self._broker_port: int = eval(f'BROKER_REGION_{self._region_id}_PORT')
 
