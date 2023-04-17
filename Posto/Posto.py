@@ -1,9 +1,11 @@
 from uuid import uuid4
 from random import randint
 import paho.mqtt.client as mqtt_client
-from consts import BROKER_ADDR, BROKER_PORT, GAS_STATION_TIME_TO_SEND, GAS_STATION_TIME_TO_REFRESH
 from time import sleep
 from threading import Thread
+import sys
+sys.path.insert(0, '..')
+from consts.consts import BROKER_ADDR, BROKER_PORT, GAS_STATION_TIME_TO_SEND, GAS_STATION_TIME_TO_REFRESH
 
 
 # O posto vai criar um topico no broker
