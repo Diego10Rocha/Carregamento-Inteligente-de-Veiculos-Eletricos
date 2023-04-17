@@ -6,7 +6,7 @@ from threading import Thread
 
 import sys
 sys.path.insert(0, '..')
-from consts import *
+from consts.consts import *
 
 
 # O posto vai criar um topico no broker
@@ -42,7 +42,7 @@ class Posto:
         self._broker_addr: str = eval(f'BROKER_REGION_{self._region_id}_ADDR')
         self._broker_port: int = eval(f'BROKER_REGION_{self._region_id}_PORT')
         self._queue: int = randint(0, 100)
-        self.topic: str = f'gas_station/region/{self._region_id}/id/{self._id}'
+        self._topic: str = f'gas_station/region/{self._region_id}/id/{self._id}'
 
     def _connect_mqtt(self) -> mqtt_client:
         client = mqtt_client.Client()
@@ -51,6 +51,7 @@ class Posto:
         return client
 
     def _publish(self, client: mqtt_client) -> None:
+        print(self._topic)
         while True:
             sleep(GAS_STATION_TIME_TO_SEND)
             topic = self._topic
