@@ -1,11 +1,10 @@
-import sys
 from paho.mqtt import client as mqtt_client
 from uuid import uuid4
 from abc import ABC, abstractmethod
+
+import sys
 sys.path.insert(0, '..')
-from consts.consts import BROKER_ADDR, BROKER_PORT
-
-
+from consts.consts import *
 # Codigo executado ao receber uma mensagem do broker
 
 
