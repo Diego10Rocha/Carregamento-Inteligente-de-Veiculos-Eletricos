@@ -4,12 +4,16 @@ from paho.mqtt import client as mqtt_client
 from json import loads, dumps
 from threading import Thread
 from time import sleep
-from consts.consts import EDGE_TIME_TO_SEND
+
+
+import sys
+sys.path.insert(0, '..')
+from consts.consts import *
 
 
 class Nevoa(MQTTSubscriber):
-    def __init__(self, c_addr: str, c_port: int, broker_addr: str, broker_port: int, region: int) -> None:
-        super().__init__(region=region, broker_port=broker_port, broker_addr=broker_addr)
+    def __init__(self, region: int, c_addr: str, c_port: int) -> None:
+        super().__init__(region=region)
         self._cloud_addr: str = c_addr
         self._cloud_port: int = c_port
         self._three_best_queues: list = list()
