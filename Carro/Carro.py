@@ -3,8 +3,10 @@ import random
 import threading
 import time
 from uuid import uuid4
-from consts import BROKER_ADDR, BROKER_PORT
 from paho.mqtt import client as mqtt_client
+import sys
+sys.path.insert(0, '..')
+from consts.consts import BROKER_ADDR, BROKER_PORT
 
 
 def on_connect(client, userdata, flags, rc: int) -> None:
