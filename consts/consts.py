@@ -1,7 +1,14 @@
 from typing import Final
 
-BROKER_ADDR: Final = 'localhost'
-BROKER_PORT: Final = 1883
+BROKER_REGION_1_ADDR: Final = "localhost"
+BROKER_REGION_1_PORT: Final = 1883
+
+BROKER_REGION_2_ADDR: Final = "localhost"
+BROKER_REGION_2_PORT: Final = 1883
+
+BROKER_REGION_3_ADDR: Final = "localhost"
+BROKER_REGION_3_PORT: Final = 1883
+  
 GAS_STATION_TIME_TO_SEND: Final = 7
 GAS_STATION_TIME_TO_REFRESH: Final = 90
 EDGE_TIME_TO_SEND: Final = 10
