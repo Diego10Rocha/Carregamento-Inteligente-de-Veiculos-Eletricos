@@ -34,12 +34,12 @@ def on_connect(rc: int) -> None:
 
 class Posto:
     def __init__(self) -> None:
-        self._id: str = str(uuid4())
-        self._region: int = randint(1, 3)
+        self._id: str = uuid4().__str__()
+        self._region_id: int = randint(1, 3)
         self._broker_addr: str = BROKER_ADDR
         self._broker_port: int = BROKER_PORT
         self._queue: int = randint(0, 100)
-        self._topic: str = 'gas_station' + '/' + self._id + '/' + 'region' + '/' + self._region.__str__()
+        self._topic: str = 'gas_station' + '/' + 'region' + '/' + str(self._region_id) + '/' + 'id' + '/' + self._id
 
     def _connect_mqtt(self) -> mqtt_client:
         client = mqtt_client.Client()
@@ -51,14 +51,14 @@ class Posto:
         while True:
             sleep(GAS_STATION_TIME_TO_SEND)
             topic = self._topic
-            msg = self._queue
+            msg = f'{{"id": "{self._id.__str__()}", "queue": {self._queue}}}'
             result = client.publish(topic, msg)
             status = result[0]
             print('Failed to send message') if status else print('Successful send message')
 
     def start(self) -> None:
-        self._connect_mqtt()
-        thread1 = Thread(target=self._publish)
+        client = self._connect_mqtt()
+        thread1 = Thread(target=self._publish, args=(client,))
         thread2 = Thread(target=self._refresh_queue)
         thread1.start()
         thread2.start()
