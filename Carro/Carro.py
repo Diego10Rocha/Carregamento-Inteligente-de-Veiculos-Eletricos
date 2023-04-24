@@ -4,9 +4,11 @@ import threading
 import time
 from uuid import uuid4
 from paho.mqtt import client as mqtt_client
+from socket import socket, AF_INET, SOCK_STREAM
+
 import sys
 sys.path.insert(0, '..')
-from consts.consts import BROKER_ADDR, BROKER_PORT
+from consts.consts import *
 
 
 def on_connect(client, userdata, flags, rc: int) -> None:
@@ -24,11 +26,13 @@ class Station:
 
 
 class Car:
-    def __init__(self) -> None:
+    def __init__(self, cloud_addr: str, cloud_port: int) -> None:
         self._id: str = str(uuid4())
-        self._region: int = 1 #random.randint(1, 3)
-        self._broker_addr: str = BROKER_ADDR
-        self._broker_port: int = BROKER_PORT
+        self._region: int = random.randint(1, 3)
+        self._broker_addr: str = eval(f'BROKER_REGION_{self._region}_ADDR')
+        self._broker_port: int = eval(f'BROKER_REGION_{self._region}_PORT')
+        self._cloud_addr: str = cloud_addr
+        self._cloud_port: int = cloud_port
         self._battery_total_charge: int = 10
         self._topic: str = 'gas_station' + '/+/' + 'region' + '/' + self._region.__str__()
         self._battery_level = self._battery_total_charge
@@ -39,6 +43,11 @@ class Car:
         client.on_connect = on_connect
         client.connect(self._broker_addr, self._broker_port)
         return client
+
+    def _socket_connect(self) -> socket:
+        sock = socket(AF_INET, SOCK_STREAM)
+        sock.connect((self._cloud_addr, self._cloud_port))
+        return sock
 
     def _mqtt_connect(self):
         client = self._connect_mqtt()
@@ -74,6 +83,13 @@ class Car:
                 self._battery_level = self._battery_total_charge
                 print("O carro acabou de ser recarregado!")
         print("O carro morreu, impossível ir até um posto")
+
+    def _get_cloud_gas_station(self) -> str:
+        car_conn = self._socket_connect()
+        msg = f'{{"region_id": {self._region}, "gas_station":"best"}}'.encode(encoding='UTF-8')
+        car_conn.send(msg)
+        response = car_conn.recv(DEFAULT_RECV_TCP_BYTES).decode()
+        return response
 
     def start(self):
         thread1 = threading.Thread(target=self._mqtt_connect)
