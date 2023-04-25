@@ -1,0 +1,10 @@
+version: "2"
+services:
+  server:
+    image: pbl2_posto
+    build:
+      context: .
+      dockerfile: Dockerfile
+    restart: always
+    volumes:
+      - /app
