@@ -10,7 +10,7 @@ def print_hi(name):
 
 def run_posto() -> None:
     my_posto = Posto()
-    Posto.start()
+    my_posto.start()
 
 # Press the green button in the gutter to run the script.
 if __name__ == '__main__':
