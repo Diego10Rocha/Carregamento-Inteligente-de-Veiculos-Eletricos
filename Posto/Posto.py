@@ -4,9 +4,7 @@ import paho.mqtt.client as mqtt_client
 from time import sleep
 from threading import Thread
 
-import sys
-sys.path.insert(0, '..')
-from consts.consts import *
+from consts import *
 
 
 # O posto vai criar um topico no broker
