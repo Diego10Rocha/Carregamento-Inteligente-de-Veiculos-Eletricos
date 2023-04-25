@@ -1,5 +1,11 @@
 from typing import Final
 
+REGION_1: Final = 1
+REGION_2: Final = 2
+REGION_3: Final = 3
+
+DEFAULT_RECV_TCP_BYTES: Final = 1024
+
 BROKER_REGION_1_ADDR: Final = "localhost"
 BROKER_REGION_1_PORT: Final = 1883
 

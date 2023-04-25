@@ -3,9 +3,10 @@ from random import randint
 import paho.mqtt.client as mqtt_client
 from time import sleep
 from threading import Thread
+
 import sys
 sys.path.insert(0, '..')
-from consts.consts import BROKER_ADDR, BROKER_PORT, GAS_STATION_TIME_TO_SEND, GAS_STATION_TIME_TO_REFRESH
+from consts.consts import *
 
 
 # O posto vai criar um topico no broker
@@ -35,13 +36,13 @@ def on_connect(rc: int) -> None:
 
 
 class Posto:
-    def __init__(self) -> None:
+    def __init__(self, region_id: int) -> None:
         self._id: str = uuid4().__str__()
-        self._region_id: int = randint(1, 3)
-        self._broker_addr: str = BROKER_ADDR
-        self._broker_port: int = BROKER_PORT
+        self._region_id: int = region_id
+        self._broker_addr: str = eval(f'BROKER_REGION_{self._region_id}_ADDR')
+        self._broker_port: int = eval(f'BROKER_REGION_{self._region_id}_PORT')
         self._queue: int = randint(0, 100)
-        self._topic: str = 'gas_station' + '/' + 'region' + '/' + str(self._region_id) + '/' + 'id' + '/' + self._id
+        self._topic: str = f'gas_station/region/{self._region_id}/id/{self._id}'
 
     def _connect_mqtt(self) -> mqtt_client:
         client = mqtt_client.Client()
@@ -50,10 +51,11 @@ class Posto:
         return client
 
     def _publish(self, client: mqtt_client) -> None:
+        print(self._topic)
         while True:
             sleep(GAS_STATION_TIME_TO_SEND)
             topic = self._topic
-            msg = f'{{"id": "{self._id.__str__()}", "queue": {self._queue}}}'
+            msg = f'{{"region_id": {self._region_id}, "id": "{self._id.__str__()}", "queue": {self._queue}}}'
             result = client.publish(topic, msg)
             status = result[0]
             print('Failed to send message') if status else print('Successful send message')
