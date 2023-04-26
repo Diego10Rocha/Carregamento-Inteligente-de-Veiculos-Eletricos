@@ -1,7 +1,7 @@
 version: "2"
 services:
   server:
-    image: diego10rocha/pbl2_redes:nevoa
+    image: pbl2_nevoa
     build:
       context: .
       dockerfile: Dockerfile

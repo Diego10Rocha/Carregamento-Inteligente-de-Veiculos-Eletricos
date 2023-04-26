@@ -7,6 +7,6 @@ services:
       dockerfile: Dockerfile
     restart: always
     ports:
-      - "7853:7853/tcp"
-      - "7873:7873/tcp"
+      - "1853:1853/tcp"
+      - "1873:1873/tcp"
     network_mode: "bridge"

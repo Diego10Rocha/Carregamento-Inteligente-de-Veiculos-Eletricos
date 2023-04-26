@@ -10,7 +10,8 @@ def print_hi(name):
     print(f'Hi, {name}')  # Press Ctrl+F8 to toggle the breakpoint.
 
 def run_nevoa() -> None:
-    my_nevoa = Nevoa(REGION_1, CLOUD_ADDR, CLOUD_NEVOA_PORT)
+    region = int(input("Digite a região da nevoa: "))
+    my_nevoa = Nevoa(region, CLOUD_ADDR, CLOUD_NEVOA_PORT)
     my_nevoa.run()
 # Press the green button in the gutter to run the script.
 if __name__ == '__main__':
