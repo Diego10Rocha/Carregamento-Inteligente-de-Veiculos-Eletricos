@@ -1,0 +1,8 @@
+version: "2"
+services:
+  server:
+    image: pbl2_nevoa
+    build:
+      context: .
+      dockerfile: Dockerfile
+    restart: always

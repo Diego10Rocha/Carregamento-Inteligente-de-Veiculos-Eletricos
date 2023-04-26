@@ -1,7 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
   <component name="ChangeListManager">
-    <list default="true" id="900694d0-4324-4577-a38e-f849492aed4a" name="Changes" comment="" />
+    <list default="true" id="900694d0-4324-4577-a38e-f849492aed4a" name="Changes" comment="update consts">
+      <change afterPath="$PROJECT_DIR$/Cloud/Dockerfile" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Cloud/docker-compose.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Nevoa/Dockerfile" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Nevoa/docker-compose.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -15,16 +24,61 @@
       </list>
     </option>
   </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="UPDATE_TYPE" value="REBASE" />
+  </component>
   <component name="ProjectId" id="2ONdNHm6Vc7Np2Of23Wg8z0G3Bf" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "WebServerToolWindowFactoryState": "false",
+    "last_opened_file_path": "/home/stick/Carregamento-Inteligente-de-Veiculos-Eletricos/Cloud",
+    "node.js.detected.package.eslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
-  <component name="RunManager">
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/Cloud" />
+      <recent name="$PROJECT_DIR$/Nevoa" />
+      <recent name="$PROJECT_DIR$/Nuvem" />
+      <recent name="$PROJECT_DIR$/Posto" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/Cloud" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Python.main">
+    <configuration name="main" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="Carregamento-Inteligente-de-Veiculos-Eletricos" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Cloud" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Cloud/main.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <configuration name="PBL 2" type="Python.FastAPI">
       <option name="file" value="$PROJECT_DIR$/main.py" />
       <module name="PBL 2" />
@@ -39,6 +93,11 @@
       <option name="launchJavascriptDebuger" value="false" />
       <method v="2" />
     </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Python.main" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -49,10 +108,191 @@
       <option name="presentableId" value="Default" />
       <updated>1681404937035</updated>
       <workItem from="1681404984267" duration="387000" />
+      <workItem from="1682527836125" duration="599000" />
     </task>
+    <task id="LOCAL-00001" summary="auto-generate region id">
+      <created>1682443683510</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1682443683510</updated>
+    </task>
+    <task id="LOCAL-00002" summary="first commit">
+      <created>1682443835747</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1682443835747</updated>
+    </task>
+    <task id="LOCAL-00003" summary="import consts corretcion">
+      <created>1682443909161</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1682443909161</updated>
+    </task>
+    <task id="LOCAL-00004" summary="run posto">
+      <created>1682443951478</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1682443951478</updated>
+    </task>
+    <task id="LOCAL-00005" summary="run posto">
+      <created>1682444749133</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1682444749133</updated>
+    </task>
+    <task id="LOCAL-00006" summary="Add gas_station_id to response">
+      <created>1682510545106</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1682510545106</updated>
+    </task>
+    <task id="LOCAL-00007" summary="add local consts">
+      <created>1682515219803</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1682515219803</updated>
+    </task>
+    <task id="LOCAL-00008" summary="remove unnecessary logs">
+      <created>1682515272397</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1682515272397</updated>
+    </task>
+    <task id="LOCAL-00009" summary="correction to add new gas station and add local consts">
+      <created>1682515323736</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1682515323736</updated>
+    </task>
+    <task id="LOCAL-00010" summary="local consts">
+      <created>1682515357028</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1682515357028</updated>
+    </task>
+    <task id="LOCAL-00011" summary="help us on manage files consts">
+      <created>1682515401867</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1682515401867</updated>
+    </task>
+    <task id="LOCAL-00012" summary="locale consts">
+      <created>1682516089351</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1682516089351</updated>
+    </task>
+    <task id="LOCAL-00013" summary="correction consts import">
+      <created>1682516104703</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1682516104703</updated>
+    </task>
+    <task id="LOCAL-00014" summary="add clout port and addr constants">
+      <created>1682516412603</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1682516412603</updated>
+    </task>
+    <task id="LOCAL-00015" summary="fix consts import and add autogenerate nevoa region id">
+      <created>1682516456171</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1682516456171</updated>
+    </task>
+    <task id="LOCAL-00016" summary="Nevoa main">
+      <created>1682516567504</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1682516567504</updated>
+    </task>
+    <task id="LOCAL-00017" summary="update cloud ports">
+      <created>1682518106051</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1682518106051</updated>
+    </task>
+    <task id="LOCAL-00018" summary="update consts">
+      <created>1682518417960</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1682518417960</updated>
+    </task>
+    <task id="LOCAL-00019" summary="update nevoa main">
+      <created>1682518595149</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1682518595149</updated>
+    </task>
+    <task id="LOCAL-00020" summary="update consts">
+      <created>1682528066020</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1682528066020</updated>
+    </task>
+    <option name="localTasksCounter" value="21" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="docker" />
+    <MESSAGE value="auto-generate region id" />
+    <MESSAGE value="first commit" />
+    <MESSAGE value="import consts corretcion" />
+    <MESSAGE value="run posto" />
+    <MESSAGE value="Add gas_station_id to response" />
+    <MESSAGE value="add local consts" />
+    <MESSAGE value="remove unnecessary logs" />
+    <MESSAGE value="correction to add new gas station and add local consts" />
+    <MESSAGE value="local consts" />
+    <MESSAGE value="help us on manage files consts" />
+    <MESSAGE value="locale consts" />
+    <MESSAGE value="correction consts import" />
+    <MESSAGE value="add clout port and addr constants" />
+    <MESSAGE value="fix consts import and add autogenerate nevoa region id" />
+    <MESSAGE value="Nevoa main" />
+    <MESSAGE value="update cloud ports" />
+    <MESSAGE value="update nevoa main" />
+    <MESSAGE value="update consts" />
+    <option name="LAST_COMMIT_MESSAGE" value="update consts" />
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/Carregamento_Inteligente_de_Veiculos_Eletricos$Posto.coverage" NAME="Posto Coverage Results" MODIFIED="1681751858116" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Posto" />
+    <SUITE FILE_PATH="coverage/Carregamento_Inteligente_de_Veiculos_Eletricos$main__2_.coverage" NAME="main (2) Coverage Results" MODIFIED="1682291730556" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Cloud" />
+    <SUITE FILE_PATH="coverage/Carregamento_Inteligente_de_Veiculos_Eletricos$main__1_.coverage" NAME="main (1) Coverage Results" MODIFIED="1682291373687" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Nuvem" />
+    <SUITE FILE_PATH="coverage/Carregamento_Inteligente_de_Veiculos_Eletricos$main.coverage" NAME="main Coverage Results" MODIFIED="1682513052611" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Cloud" />
   </component>
 </project>
