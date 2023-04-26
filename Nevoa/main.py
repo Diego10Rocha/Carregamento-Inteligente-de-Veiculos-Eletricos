@@ -1,6 +1,6 @@
 # This is a sample Python script.
 from Nevoa import Nevoa
-from consts import CLOUD_ADDR, CLOUD_PORT
+from consts import CLOUD_NEVOA_PORT, CLOUD_ADDR, REGION_1, REGION_2, REGION_3
 # Press Shift+F10 to execute it or replace it with your code.
 # Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
 
@@ -10,7 +10,7 @@ def print_hi(name):
     print(f'Hi, {name}')  # Press Ctrl+F8 to toggle the breakpoint.
 
 def run_nevoa() -> None:
-    my_nevoa = Nevoa(CLOUD_ADDR, CLOUD_PORT)
+    my_nevoa = Nevoa(REGION_1, CLOUD_ADDR, CLOUD_NEVOA_PORT)
     my_nevoa.run()
 # Press the green button in the gutter to run the script.
 if __name__ == '__main__':
