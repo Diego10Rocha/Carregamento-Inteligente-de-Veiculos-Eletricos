@@ -1,14 +1,11 @@
 from socket import socket, AF_INET, SOCK_STREAM
 from paho.mqtt import client as mqtt_client
-from json import loads, dumps
+from json import loads
 from threading import Thread
 from time import sleep
 from uuid import uuid4
-
-
-import sys
-sys.path.insert(0, '..')
-from consts.consts import *
+from consts import *
+from random import randint
 
 
 def on_connect(client, userdata, flags, rc: int) -> None:
@@ -19,14 +16,14 @@ def on_connect(client, userdata, flags, rc: int) -> None:
 
 
 class Nevoa:
-    def __init__(self, region: int, c_addr: str, c_port: int) -> None:
+    def __init__(self, cloud_addr: str, cloud_port: int) -> None:
         self._id = uuid4().__str__()
-        self._region_id: int = region
+        self._region_id: int = randint(1, 3)
         self._topic: str = f'gas_station/region/{self._region_id}/id/+'
         self._broker_addr: str = eval(f'BROKER_REGION_{self._region_id}_ADDR')
         self._broker_port: int = eval(f'BROKER_REGION_{self._region_id}_PORT')
-        self._cloud_addr: str = c_addr
-        self._cloud_port: int = c_port
+        self._cloud_addr: str = cloud_addr
+        self._cloud_port: int = cloud_port
         self._three_best_queues: list = list()
 
     def connect_mqtt(self) -> mqtt_client:
@@ -39,8 +36,6 @@ class Nevoa:
         client.subscribe(self._topic)
         client.on_message = self.on_message
 
-    # Talvez isso precise rodar em uma thread separada
-    # do socket
     def subscriber_run(self) -> None:
         client = self.connect_mqtt()
         self.subscribe(client)
@@ -53,10 +48,8 @@ class Nevoa:
 
     def send_best_queue(self) -> None:
         while True:
-            print("NO LACO")
             sleep(EDGE_TIME_TO_SEND)
             if self._three_best_queues:
-                print("ENTROU NO IF")
                 sock = self.edge_connect()
                 best_gas_station = self.get_best_gas_station_queue()
                 gas_stat_queue = best_gas_station['queue']
@@ -65,8 +58,6 @@ class Nevoa:
                 msg = f'{{"region_id": {gas_stat_region_id}, "gas_station_id": "{gas_stat_id}", "queue": {gas_stat_queue}}}'
                 sock.send(msg.encode(encoding='UTF-8'))
                 sock.close()
-            else:
-                print("NAO ENTROU NO IF")
 
     def _sort_three_best_queues(self) -> None:
         self._three_best_queues.sort(key=lambda gas_station_info: gas_station_info['queue'], reverse=False)

@@ -1,7 +1,6 @@
 import Cloud
+from consts import *
 
-NEVOA = 1885
-CAR = 1886
 
-my_cloud = Cloud.Cloud("localhost", NEVOA, CAR)
+my_cloud = Cloud.Cloud(CLOUD_ADDR, CLOUD_NEVOA_PORT, CLOUD_CAR_PORT)
 my_cloud.start_cloud()
