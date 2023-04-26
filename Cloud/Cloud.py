@@ -94,7 +94,9 @@ class Cloud:
         best_gas_station = self._best_region_queues[car_region_id - 1]
         best_gas_station_queue = best_gas_station['queue']
         best_gas_station_id = best_gas_station['id']
-        msg = f'{{"status":"ok", "best_gas_station_id": "{best_gas_station_id}", "queue": {best_gas_station_queue}}}'
+        best_gas_station_region_id = best_gas_station['region_id']
+        msg = f'{{"status":"ok", "gas_station_id": "{best_gas_station_id}", "queue": {best_gas_station_queue},' \
+              f' "region_id": {best_gas_station_region_id}}}'
         return msg
 
     def _server_nevoa_on(self) -> None:
