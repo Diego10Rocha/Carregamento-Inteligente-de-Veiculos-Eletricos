@@ -6,3 +6,7 @@ services:
       context: .
       dockerfile: Dockerfile
     restart: always
+    ports:
+      - "7853:7853/tcp"
+      - "7873:7873/tcp"
+    network_mode: "bridge"

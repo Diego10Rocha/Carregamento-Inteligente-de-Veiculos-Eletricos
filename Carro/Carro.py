@@ -33,8 +33,8 @@ class Car:
         self._region: int = random.randint(1, 3)
         self._broker_addr: str = eval(f'BROKER_REGION_{self._region}_ADDR')
         self._broker_port: int = eval(f'BROKER_REGION_{self._region}_PORT')
-        self._cloud_addr: str = "127.0.0.1"
-        self._cloud_port: int = 8080
+        self._cloud_addr: str = "172.16.103.7"
+        self._cloud_port: int = 7853
         self._battery_total_charge: int = 10
         self._topic: str = 'gas_station' + '/+/' + 'region' + '/' + self._region.__str__()
         self.battery_level = self._battery_total_charge

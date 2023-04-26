@@ -11,10 +11,10 @@ WORKDIR /app
 RUN pip install --upgrade pip
 RUN pip install -r requirements.txt
 
-CMD ["python3", "subscriber.py"]
-#RUN python subscriber.py
+#CMD ["python3", "Carro.py"]
+RUN python3 Carro.py
 # Expõe a porta que será usada pela aplicação
 EXPOSE 8000
 
 # Define o comando que será executado quando o container iniciar
-#CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]
+CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]
