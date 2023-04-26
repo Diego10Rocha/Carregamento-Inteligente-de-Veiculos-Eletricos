@@ -53,10 +53,8 @@ class Nevoa:
 
     def send_best_queue(self) -> None:
         while True:
-            print("NO LACO")
             sleep(EDGE_TIME_TO_SEND)
             if self._three_best_queues:
-                print("ENTROU NO IF")
                 sock = self.edge_connect()
                 best_gas_station = self.get_best_gas_station_queue()
                 gas_stat_queue = best_gas_station['queue']
@@ -65,8 +63,6 @@ class Nevoa:
                 msg = f'{{"region_id": {gas_stat_region_id}, "gas_station_id": "{gas_stat_id}", "queue": {gas_stat_queue}}}'
                 sock.send(msg.encode(encoding='UTF-8'))
                 sock.close()
-            else:
-                print("NAO ENTROU NO IF")
 
     def _sort_three_best_queues(self) -> None:
         self._three_best_queues.sort(key=lambda gas_station_info: gas_station_info['queue'], reverse=False)
