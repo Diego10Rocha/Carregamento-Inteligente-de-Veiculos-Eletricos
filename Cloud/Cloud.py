@@ -2,9 +2,7 @@ from socket import socket, AF_INET, SOCK_STREAM
 from threading import Thread
 from json import loads
 
-import sys
-sys.path.insert(0, '..')
-from consts.consts import *
+from consts import *
 
 # A nuvem nao possui regiao, pois e um servidor central
 # A nuvem sera um servidor construido em socket que implementara um protocolo
@@ -47,28 +45,28 @@ class Cloud:
     def _add_best_gas_station(self, new_best_gas_station) -> None:
         if len(self._best_region_queues) == 3:
             self._refresh_best_gas_stations(new_best_gas_station)
-            self._sort_best_region_queues()
-            return
-        new_best_gas_station_region_id = new_best_gas_station['region_id']
-        best_gas_station_region_ids = list(map(lambda g: g['region_id'], self._best_region_queues))
-        if new_best_gas_station_region_id not in best_gas_station_region_ids:
-            self._best_region_queues.append(new_best_gas_station)
-            self._sort_best_region_queues()
         else:
-            # Acho que nem precisa desse for
-            if new_best_gas_station['id'] != self._best_region_queues[new_best_gas_station_region_id - 1]['id']:
-                self._best_region_queues[new_best_gas_station_region_id - 1] = new_best_gas_station
+            new_best_gas_station_region_id = new_best_gas_station['region_id']
+            best_gas_station_region_ids = list(map(lambda gas_station: gas_station['region_id'], self._best_region_queues))
+            if new_best_gas_station_region_id not in best_gas_station_region_ids:
+                self._best_region_queues.append(new_best_gas_station)
                 self._sort_best_region_queues()
-            elif new_best_gas_station['queue'] != self._best_region_queues[new_best_gas_station_region_id - 1]['queue']:
-                self._best_region_queues[new_best_gas_station_region_id - 1] = new_best_gas_station
-                self._sort_best_region_queues()
+            else:
+                curr_best_gas_station_id = self._best_region_queues[new_best_gas_station_region_id - 1]['id']
+                curr_best_gas_station_queue = self._best_region_queues[new_best_gas_station_region_id - 1]['queue']
+                if new_best_gas_station_region_id != curr_best_gas_station_id:
+                    self._best_region_queues[new_best_gas_station_region_id - 1] = new_best_gas_station
+                    self._sort_best_region_queues()
+                elif new_best_gas_station_region_id != curr_best_gas_station_queue:
+                    self._best_region_queues[new_best_gas_station_region_id - 1] = new_best_gas_station
+                    self._sort_best_region_queues()
 
     def _refresh_best_gas_stations(self, new_best_gas_station: dict) -> None:
         new_best_gas_station_region_id = new_best_gas_station['region_id']
         new_best_gas_station_queue = new_best_gas_station['queue']
         old_best_gas_station = self._best_region_queues[new_best_gas_station_region_id - 1]
         old_best_gas_station_queue = old_best_gas_station['queue']
-        if old_best_gas_station_queue > new_best_gas_station_queue:
+        if old_best_gas_station_queue != new_best_gas_station_queue:
             self._best_region_queues[new_best_gas_station_region_id - 1] = new_best_gas_station
 
     def _create_car_server_side(self) -> socket:
@@ -79,19 +77,20 @@ class Cloud:
         Thread(target=self._create_car_server_side).start()
         return client_socket
 
+    def _get_best_gas_station_queue(self) -> dict:
+        return max(self._best_region_queues, key=lambda gas_station: gas_station['queue'])
+
     # Responder para o carro o melhor posto com base na regiao
     # que ele esta
     # Depois de receber a requisicao do carro eu preciso retornar
     # o melhor posto para ele.
     def _on_car_recieve(self, client_socket) -> None:
-        car_request = loads(client_socket.recv(DEFAULT_RECV_TCP_BYTES).decode())
-        msg = self._generate_car_response(car_request)
+        msg = self._generate_car_response()
         client_socket.send(msg.encode(encoding='UTF-8'))
         client_socket.close()
 
-    def _generate_car_response(self, car_request: dict) -> str:
-        car_region_id = car_request['region_id']
-        best_gas_station = self._best_region_queues[car_region_id - 1]
+    def _generate_car_response(self) -> str:
+        best_gas_station = self._get_best_gas_station_queue()
         best_gas_station_queue = best_gas_station['queue']
         best_gas_station_id = best_gas_station['id']
         best_gas_station_region_id = best_gas_station['region_id']
@@ -100,12 +99,13 @@ class Cloud:
         return msg
 
     def _server_nevoa_on(self) -> None:
+        print(f'\033[1;31;42mCLOUD BEST REGION QUEUES -> {self._best_region_queues}\033[m')
         nevoa_socket = self._create_nevoa_server_side()
-        print(f'BEST REGION QUEUES -> {self._best_region_queues}')
         self._on_nevoa_recieve(nevoa_socket)
 
     def _server_car_on(self) -> None:
         car_socket = self._create_car_server_side()
+        print(f'\033[1;31mRECEIVE REQUEST FROM CAR\033[m')
         self._on_car_recieve(car_socket)
 
     def start_cloud(self) -> None:
