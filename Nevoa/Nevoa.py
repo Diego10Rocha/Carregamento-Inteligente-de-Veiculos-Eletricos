@@ -4,11 +4,7 @@ from json import loads, dumps
 from threading import Thread
 from time import sleep
 from uuid import uuid4
-
-
-import sys
-sys.path.insert(0, '..')
-from consts.consts import *
+from consts import *
 
 
 def on_connect(client, userdata, flags, rc: int) -> None:
@@ -19,14 +15,14 @@ def on_connect(client, userdata, flags, rc: int) -> None:
 
 
 class Nevoa:
-    def __init__(self, region: int, c_addr: str, c_port: int) -> None:
+    def __init__(self, region_id: int, cloud_addr: str, cloud_port: int) -> None:
         self._id = uuid4().__str__()
-        self._region_id: int = region
+        self._region_id: int = region_id
         self._topic: str = f'gas_station/region/{self._region_id}/id/+'
         self._broker_addr: str = eval(f'BROKER_REGION_{self._region_id}_ADDR')
         self._broker_port: int = eval(f'BROKER_REGION_{self._region_id}_PORT')
-        self._cloud_addr: str = c_addr
-        self._cloud_port: int = c_port
+        self._cloud_addr: str = cloud_addr
+        self._cloud_port: int = cloud_port
         self._three_best_queues: list = list()
 
     def connect_mqtt(self) -> mqtt_client:
@@ -39,8 +35,6 @@ class Nevoa:
         client.subscribe(self._topic)
         client.on_message = self.on_message
 
-    # Talvez isso precise rodar em uma thread separada
-    # do socket
     def subscriber_run(self) -> None:
         client = self.connect_mqtt()
         self.subscribe(client)
