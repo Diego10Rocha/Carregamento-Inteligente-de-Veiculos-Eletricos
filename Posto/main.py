@@ -10,6 +10,7 @@ def print_hi(name):
 
 def run_posto() -> None:
     my_posto = Posto()
+    print("Id da região:", my_posto.region_id)
     my_posto.start()
 
 # Press the green button in the gutter to run the script.
