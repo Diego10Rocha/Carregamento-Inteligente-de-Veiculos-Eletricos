@@ -5,8 +5,6 @@ from threading import Thread
 from time import sleep
 from uuid import uuid4
 from consts import *
-from random import randint
-
 
 def on_connect(client, userdata, flags, rc: int) -> None:
     if not rc:
@@ -16,9 +14,9 @@ def on_connect(client, userdata, flags, rc: int) -> None:
 
 
 class Nevoa:
-    def __init__(self, cloud_addr: str, cloud_port: int) -> None:
+    def __init__(self, region_id: int, cloud_addr: str, cloud_port: int) -> None:
         self._id = uuid4().__str__()
-        self._region_id: int = randint(1, 3)
+        self._region_id: int = region_id
         self._topic: str = f'gas_station/region/{self._region_id}/id/+'
         self._broker_addr: str = eval(f'BROKER_REGION_{self._region_id}_ADDR')
         self._broker_port: int = eval(f'BROKER_REGION_{self._region_id}_PORT')
