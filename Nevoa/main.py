@@ -11,7 +11,7 @@ def print_hi(name):
 
 def run_nevoa() -> None:
     region = int(input("Digite a região da nevoa: "))
-    my_nevoa = Nevoa(region, "localhost", CLOUD_NEVOA_PORT)
+    my_nevoa = Nevoa(region, CLOUD_ADDR, CLOUD_NEVOA_PORT)
     my_nevoa.run()
 # Press the green button in the gutter to run the script.
 if __name__ == '__main__':

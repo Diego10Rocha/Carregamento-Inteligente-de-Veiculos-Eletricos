@@ -16,12 +16,12 @@ Alem de conexoes HTTP a API lida com requisicoes CKINHTTP
 
 
 class SoftAPI:
-    def __init__(self, addr: str, port: int) -> None:
+    def __init__(self, addr: str, port: int, region_id: int) -> None:
         self._addr: str = addr
         self._port: int = port
         self._socket: socket = None
         self._routes: dict = dict()
-        self._raw_api_controller: Car = Car()
+        self._raw_api_controller: Car = Car(region_id)
 
     # Instancia um socket TCP do tipo server
     def create_server(self) -> None:

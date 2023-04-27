@@ -9,7 +9,8 @@ def print_hi(name):
     print(f'Hi, {name}')  # Press Ctrl+F8 to toggle the breakpoint.
 
 def run_posto() -> None:
-    my_posto = Posto()
+    region_id = int(input("Digite a regiao do posto: "))
+    my_posto = Posto(region_id)
     print("Id da região:", my_posto.region_id)
     my_posto.start()
 

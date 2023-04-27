@@ -1,5 +1,5 @@
 # Define a imagem base que será usada
-FROM tiangolo/uvicorn-gunicorn-fastapi:python3.10
+FROM python:latest
 
 # Copia o código fonte da sua aplicação para dentro do container
 COPY ./ /app
@@ -12,9 +12,9 @@ RUN pip install --upgrade pip
 RUN pip install -r requirements.txt
 
 #CMD ["python3", "Carro.py"]
-RUN python3 Carro.py
+#RUN python3 Carro.py
 # Expõe a porta que será usada pela aplicação
-EXPOSE 8000
+EXPOSE 8889/tcp
 
 # Define o comando que será executado quando o container iniciar
-CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]
+#CMD CMD ["python3", "main.py"]

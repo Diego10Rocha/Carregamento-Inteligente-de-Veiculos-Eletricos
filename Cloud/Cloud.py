@@ -85,7 +85,7 @@ class Cloud:
     def _create_car_server_side(self) -> socket:
         client_socket, addr = self._socket_car.accept()
         Thread(target=self._create_car_server_side).start()
-        return client_socket
+        self._on_car_recieve(client_socket)
 
     def _get_best_gas_station_queue(self) -> dict:
         return max(self._best_region_queues, key=lambda gas_station: gas_station['queue'])
@@ -97,14 +97,14 @@ class Cloud:
     def _on_car_recieve(self, client_socket) -> None:
         msg = self._generate_car_response()
         client_socket.send(msg.encode(encoding='UTF-8'))
-        client_socket.close()
+        #client_socket.close()
 
     def _generate_car_response(self) -> str:
         best_gas_station = self._get_best_gas_station_queue()
         best_gas_station_queue = best_gas_station['queue']
         best_gas_station_id = best_gas_station['id']
         best_gas_station_region_id = best_gas_station['region_id']
-        msg = f'{{"status":"ok", "gas_station_id": "{best_gas_station_id}", "queue": {best_gas_station_queue},' \
+        msg = f'{{"status":"ok", "id": "{best_gas_station_id}", "queue": {best_gas_station_queue},' \
               f' "region_id": {best_gas_station_region_id}}}'
         return msg
 
@@ -114,9 +114,8 @@ class Cloud:
 
 
     def _server_car_on(self) -> None:
-        car_socket = self._create_car_server_side()
+        self._create_car_server_side()
         print(f'\033[1;31mRECEIVE REQUEST FROM CAR\033[m')
-        self._on_car_recieve(car_socket)
 
     def start_cloud(self) -> None:
         self.create_server_nevoa()

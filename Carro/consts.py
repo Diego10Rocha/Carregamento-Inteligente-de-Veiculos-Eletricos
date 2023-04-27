@@ -20,7 +20,7 @@ BROKER_REGION_3_ADDR: Final = "172.16.103.8"
 BROKER_REGION_3_PORT: Final = 1888
   
 GAS_STATION_TIME_TO_SEND: Final = 7
-GAS_STATION_TIME_TO_REFRESH: Final = 90
+GAS_STATION_TIME_TO_REFRESH: Final = 45
 EDGE_TIME_TO_SEND: Final = 10
 
 '''
@@ -53,3 +53,4 @@ METER_TAX: Final = "faturas"
 # WARNING: do not touch this if you don't have no idea what do
 # Os dados vindouros dos medidores serao depositados nesta rota,
 METER_API_ROUTE: Final = "clientes"
+

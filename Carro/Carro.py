@@ -23,15 +23,15 @@ class Station:
 
 
 class Car:
-    def __init__(self) -> None:
+    def __init__(self, region_id: int) -> None:
         self._id: str = str(uuid4())
-        self._region: int = random.randint(1, 3)
+        self._region: int = region_id
         self._broker_addr: str = eval(f'BROKER_REGION_{self._region}_ADDR')
         self._broker_port: int = eval(f'BROKER_REGION_{self._region}_PORT')
-        self._cloud_addr: str = "172.16.103.7"
-        self._cloud_port: int = 7853
-        self._battery_total_charge: int = 10
-        self._topic: str = 'gas_station' + '/+/' + 'region' + '/' + self._region.__str__()
+        self._cloud_addr: str = CLOUD_ADDR
+        self._cloud_port: int = CLOUD_CAR_PORT
+        self._battery_total_charge: int = 100
+        self._topic: str = 'gas_station' + '/+/' + 'region' + '/' + self._region.__str__() + '/#'
         self.battery_level = self._battery_total_charge
         self.best_station: Station = None
         self.recharging = False
@@ -40,7 +40,7 @@ class Car:
     __instance = None
 
     @staticmethod
-    def __new__(cls):
+    def __new__(cls, region_id: int):
         if cls.__instance is None:
             cls.__instance = super().__new__(cls)
         return cls.__instance
@@ -63,12 +63,12 @@ class Car:
 
     def _subscribe(self, client: mqtt_client):
         def on_message(client, userdata, msg):
-            print(f"Received `{msg.payload.decode()}` from `{msg.topic}` topic")
+            #print(f"Received `{msg.payload.decode()}` from `{msg.topic}` topic")
             station = json.loads(msg.payload.decode())
             if self.best_station and station.get("id", "") == self.best_station.id:
                 self.best_station.queue = station.get("queue", self.best_station.queue)
             elif not self.best_station or self.best_station.queue > station.get('queue', -1):
-                self.best_station = Station(station.get('gas_station_id', ""),   # Valores invalidos para cada campo
+                self.best_station = Station(station.get('id', ""),   # Valores invalidos para cada campo
                                             station.get('region_id', -1),
                                             station.get('queue', -1))
             # else:
@@ -80,19 +80,24 @@ class Car:
 
     def _battery_manager(self):
         while self.battery_level != 0:
-            time.sleep(1)
+            time.sleep(0.3)
             self.battery_level -= 1
 
             if self.battery_level <= self._battery_total_charge * 0.3 and self.best_station:
                 self.recharging = True
-                print("Bateria descarregada")
+                print("Sua bateria está em 30%")
                 #lógica de buscar um posto na nuvem
                 if self.best_station.queue > 10:
-                    station: Station = json.loads(self._get_cloud_gas_station())
-                    if station.queue * 1.30 < self.best_station.queue:
+                    station_response = json.loads(self._get_cloud_gas_station())
+                    if station_response.get("queue") * 1.30 < self.best_station.queue:
+                        station: Station = Station(station_response.get("id"),
+                                                   station_response.get("region_id"),
+                                                   station_response.get("queue")
+                                                   )
                         self.best_station = station
                 print("Se dirigindo ao posto com id:", self.best_station.id, "na região:", self.best_station.region)
                 time_to_recharge = self.best_station.queue * 1 + (self._battery_total_charge - self.battery_level)
+                print("Tempo de espera: ", time_to_recharge, "segundos")
                 time.sleep(time_to_recharge)
                 self.battery_level = self._battery_total_charge
                 print("O carro acabou de ser recarregado!")
@@ -107,6 +112,7 @@ class Car:
         return response
 
     def start(self):
+
         thread1 = threading.Thread(target=self._mqtt_connect)
 
         thread2 = threading.Thread(target=self._battery_manager)
@@ -116,7 +122,3 @@ class Car:
 
         # iniciar a thread de gerenciamento da bateria
         thread2.start()
-
-if __name__ == '__main__':
-    carro = Car()
-    carro.start()

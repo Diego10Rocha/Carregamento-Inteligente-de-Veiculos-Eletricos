@@ -53,7 +53,7 @@ class Nevoa:
                 gas_stat_queue = best_gas_station['queue']
                 gas_stat_region_id = best_gas_station['region_id']
                 gas_stat_id = best_gas_station['id']
-                msg = f'{{"region_id": {gas_stat_region_id}, "gas_station_id": "{gas_stat_id}", "queue": {gas_stat_queue}}}'
+                msg = f'{{"region_id": {gas_stat_region_id}, "id": "{gas_stat_id}", "queue": {gas_stat_queue}}}'
                 sock.send(msg.encode(encoding='UTF-8'))
                 sock.close()
 
