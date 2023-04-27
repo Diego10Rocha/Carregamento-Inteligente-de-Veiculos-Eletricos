@@ -9,7 +9,7 @@ BROKER = 'localhost'
 
 broker = BROKER
 port = 1883
-topic = "python/mqtt"
+topic = "gas_station/region/#"
 # generate client ID with pub prefix randomly
 client_id = f'python-mqtt-{random.randint(0, 100)}'
 BATTERY_TOTAL_CHARGE = 10
@@ -61,12 +61,12 @@ def battery_manager(batery_level):
 if __name__ == '__main__':
     t1 = threading.Thread(target=mqtt_connect)
 
-    t2 = threading.Thread(target=battery_manager(BATTERY_LEVEL))
+    #t2 = threading.Thread(target=battery_manager(BATTERY_LEVEL))
     #mqtt_connect()
 
     # iniciar a thread do mqtt
     t1.start()
 
     # iniciar a thread de gerenciamento da bateria
-    t2.start()
+    #t2.start()
 
