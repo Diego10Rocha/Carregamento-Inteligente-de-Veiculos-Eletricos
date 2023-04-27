@@ -1,13 +1,6 @@
-from fastapi import FastAPI
+from SoftApi import SoftAPI
 
-from Carro import *
-
-app = FastAPI()
-
-
-@app.get("/posto")
-async def root():
-    car = Car()
-    if car.recharging:
-        return {"message": str("O carro está sendo reccarregado no posto com id:", car.best_station.id)}
-    return {"message": str("O carro está carregado com", car.battery_level, "% de bateria")}
+my_api = SoftAPI("0.0.0.0", 8889)
+my_api.create_get("posto")
+my_api.create_server()
+my_api.server_on()

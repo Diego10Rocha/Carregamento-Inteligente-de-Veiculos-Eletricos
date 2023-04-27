@@ -5,12 +5,7 @@ import time
 from uuid import uuid4
 from paho.mqtt import client as mqtt_client
 from socket import socket, AF_INET, SOCK_STREAM
-
-import sys
-
 from consts import *
-
-sys.path.insert(0, '..')
 
 
 def on_connect(client, userdata, flags, rc: int) -> None:
