@@ -1,8 +1,8 @@
 from socket import socket, AF_INET, SOCK_STREAM
 from threading import Thread
 from json import loads
-
 from consts import *
+
 
 # A nuvem nao possui regiao, pois e um servidor central
 # A nuvem sera um servidor construido em socket que implementara um protocolo
@@ -43,8 +43,8 @@ class Cloud:
         self._socket_car.listen()
 
     # Devolve o socket a conexao do cliente
-    def _create_nevoa_server_side(self) -> socket:
-        #print("Servidor criado para a nevoa na porta:", self._nevoa_port)
+    def _create_nevoa_server_side(self) -> None:
+        # print("Servidor criado para a nevoa na porta:", self._nevoa_port)
         client_socket, addr = self._socket_nevoa.accept()
         Thread(target=self._create_nevoa_server_side).start()
         self._on_nevoa_recieve(client_socket)
@@ -88,7 +88,7 @@ class Cloud:
         self._on_car_recieve(client_socket)
 
     def _get_best_gas_station_queue(self) -> dict:
-        return max(self._best_region_queues, key=lambda gas_station: gas_station['queue'])
+        return min(self._best_region_queues, key=lambda gas_station: gas_station['queue'])
 
     # Responder para o carro o melhor posto com base na regiao
     # que ele esta
@@ -111,7 +111,6 @@ class Cloud:
     def _server_nevoa_on(self) -> None:
         print(f'\033[1;31;42mCLOUD BEST REGION QUEUES: -> {self._best_region_queues}\033[m')
         self._create_nevoa_server_side()
-
 
     def _server_car_on(self) -> None:
         self._create_car_server_side()
