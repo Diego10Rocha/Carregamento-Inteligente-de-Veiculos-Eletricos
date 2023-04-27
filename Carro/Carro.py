@@ -31,7 +31,7 @@ class Car:
         self._cloud_addr: str = CLOUD_ADDR
         self._cloud_port: int = CLOUD_CAR_PORT
         self._battery_total_charge: int = 100
-        self._topic: str = 'gas_station' + '/+/' + 'region' + '/' + self._region.__str__() + '/#'
+        self._topic: str = 'gas_station' + '/' + 'region' + '/' + self._region.__str__() + '/#'
         self.battery_level = self._battery_total_charge
         self.best_station: Station = None
         self.recharging = False
@@ -63,7 +63,7 @@ class Car:
 
     def _subscribe(self, client: mqtt_client):
         def on_message(client, userdata, msg):
-            #print(f"Received `{msg.payload.decode()}` from `{msg.topic}` topic")
+            print(f"Received `{msg.payload.decode()}` from `{msg.topic}` topic")
             station = json.loads(msg.payload.decode())
             if self.best_station and station.get("id", "") == self.best_station.id:
                 self.best_station.queue = station.get("queue", self.best_station.queue)
