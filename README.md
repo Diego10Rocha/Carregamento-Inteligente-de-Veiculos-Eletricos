@@ -9,4 +9,14 @@ O objetivo deste projeto foi a implementação de um sistema distribuído utiliz
 
 ## Resultados
 
+### Nuvem
+
+### Nevoa
+
+### Posto
+
+### Carro
+
+### Docker
+
 ## Conclusão
