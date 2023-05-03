@@ -2,8 +2,20 @@
 O objetivo deste projeto foi a implementação de um sistema distribuído utilizando conceitos como computação em nevoa e em nuvem utilizando os protocolos de comunicação Rest e MQTT para implementar a comunicação entre as entidades do sistema que serão apresentadas no decorrer deste relatório.
 
 ## Introdução
+O problema energético no mundo está se tornando cada vez mais evidente, de tal forma que nos últimos anos foram inventadas as chamadas energias limpas, estas procuram não agredir o meio ambiente e produzindo energia elétrica de forma mais eficiênte e menos poluente possível que formas tradicionais de produção de energia, tais como: energia nuclear e a energia proveniente do carvão mineral, estas formas tradicionais são conhecidas por agredirem o meio ambiente.
+Além de energias limpas ou renováveis, também foram desenvolvidos outros produtos com a mesma intenção - não agredir o meio ambiente - veículos elétricos são uma destas alternativas desenvolvidas e eleitas como o futuro dos meios de transporte terrestres. Contudo carros elétricos muitas das vezes possuem autonomia limitada, logrando atenção do motorista ao conduzi-lo. Visando sanar este problema, o prefeito de uma cidade inteligente decidiu implementar um sistema IoT em sua cidade, de tal forma que motoristas de carros elétricos jamais ficariam presos devida a falta de carga nas baterias de seus respectivos veículos.
+Neste relatório é apresentado um protótipo desenvolvido visando solucionar o problema supracitado, uma vez que o prefeito decidiu contratar-nos. O sistema consiste em 4 entidades, Nuvem, Névoa, Carro e Posto, estes comunicam-se por meio do protocolo de messageria MQTT bem como socket que utilizam o protocolo da camada de transporte TCP.
 
 ## Fundamentação Teórica
+# MQTT
+O protocolo MQTT funciona sob os princípios de publicação e assinatura, de tal forma que a sua criação deu-se devida a necessidade da indústria de petróleo e gás, uma vez que estas necessitavam de uma troca constante de informações entre suas entidades, assim desacomplando o remetente do destinatário da mensagem
+O protocolo MQTT assume duas entidades:
+
+Cliente MQTT é qualquer dispositivo capaz de executar uma biblíoteca MQTT, este é capaz de criar tópicos bem como inscrever-se em tópicos existentes. Podendo atuar como destinatário ou rementente de uma mensagem.
+
+Agente MQTT, também conhecido como broker, este cordena as mensagens entre os diferentes clientes e responsável por receber, filtrar identificar os clientes inscritos em cada tópico e então encaminhar as mensagens aos clientes inscritos.
+
+# Névoa
 
 ## Metodologia
 Para solucionar o problema proposto, primeiro foram iniciados os estudos para esclarecer alguns conceitos presentes no problema como o protocolo MQTT e o que são nuvem e nevoa, como implementar uma aplicação utilizando MQTT e Socket e como criar uma imagem desse tipo de aplicação e executá-la dentro de um container docker.
